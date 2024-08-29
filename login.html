@@ -1,1 +1,85 @@
-Sorry, we are still working on this!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h1 {
+            margin: 0 0 20px;
+            color: #333;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            color: #d9534f;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login, although we're still working on this!</h1>
+        <input type="text" id="username" placeholder="Username">
+        <input type="text" id="code" placeholder="Code">
+        <button onclick="login()">Login</button>
+        <p id="message" class="message"></p>
+    </div>
+
+    <script>
+        // Mock code for demonstration
+        const validCode = "123456";  // This should be replaced with actual server-side validation
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const code = document.getElementById('code').value;
+            const messageElement = document.getElementById('message');
+
+            // Simulate fetching the code from a file (this is where server-side code would go)
+            if (code === validCode) {
+                messageElement.textContent = "Login successful!";
+                messageElement.style.color = "#5bc0de";
+                // Redirect or perform other actions on successful login
+                window.location.href = "index.html";  // Redirect to home page or another page
+            } else {
+                messageElement.textContent = "Invalid code. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
