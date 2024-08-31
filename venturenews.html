@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Hide scrollbars */
+}
+
+.credits-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide any overflowed content */
+}
+
+.scrolling-text {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 24px; /* Make the text larger */
+    animation: scroll 60s linear infinite; /* Slow down the scrolling */
+    /* Initial position starts just outside the top of the viewport */
+    transform: translateY(100%);
+}
+
+@keyframes scroll {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+audio {
+    display: none; /* Hide the audio player */
+}
