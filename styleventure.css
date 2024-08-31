@@ -25,6 +25,7 @@ body {
     bottom: 0; /* Start from the bottom of the viewport */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Center horizontally */
+    margin-bottom: -50%; /* Adjust so middle aligns with the viewport's center */
 }
 
 @keyframes scroll {
