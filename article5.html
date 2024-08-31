@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scrolling Credits</title>
+    <title>Thanks Guys/Girls</title>
     <style>
         body {
             background-color: black;
@@ -71,6 +71,19 @@
     </div>
 
     <!-- Background Music -->
-    <audio src="https://ronaldomaths.pages.dev/sijddij.mp3" autoplay loop></audio>
+    <audio id="background-audio" autoplay loop>
+        <source src="https://ronaldomaths.pages.dev/sijddij.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Make sure the audio plays by attempting to resume the audio context on user interaction
+        document.body.addEventListener('click', function () {
+            const audio = document.getElementById('background-audio');
+            audio.play().catch(error => {
+                console.error("Audio play error:", error);
+            });
+        });
+    </script>
 </body>
 </html>
