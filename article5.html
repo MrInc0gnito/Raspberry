@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanks Guys/Girls</title>
+    <title>Scrolling Credits</title>
     <style>
         body {
             background-color: black;
@@ -30,7 +30,7 @@
             position: absolute;
             top: 100%;
             width: 100%;
-            animation: scroll-up 39s linear infinite; /* Match the animation duration to the song length */
+            animation: scroll-up 39s linear infinite;
         }
 
         @keyframes scroll-up {
@@ -44,7 +44,21 @@
             font-size: 24px;
         }
 
-        audio {
+        .play-button {
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .play-button.hidden {
             display: none;
         }
     </style>
@@ -70,17 +84,25 @@
         </div>
     </div>
 
+    <!-- Play Button -->
+    <button class="play-button" id="play-button">Roll The Credits</button>
+
     <!-- Background Music -->
-    <audio id="background-audio" autoplay loop>
+    <audio id="background-audio" loop>
         <source src="https://ronaldomaths.pages.dev/sijddij.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Make sure the audio plays by attempting to resume the audio context on user interaction
-        document.body.addEventListener('click', function () {
-            const audio = document.getElementById('background-audio');
-            audio.play().catch(error => {
+        const playButton = document.getElementById('play-button');
+        const audio = document.getElementById('background-audio');
+
+        // Play audio when the play button is clicked
+        playButton.addEventListener('click', function () {
+            audio.play().then(() => {
+                console.log("Audio is playing.");
+                playButton.classList.add('hidden');  // Hide the play button after audio starts
+            }).catch(error => {
                 console.error("Audio play error:", error);
             });
         });
