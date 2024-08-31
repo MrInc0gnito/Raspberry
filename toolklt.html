@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolkit</title>
+    <script src="https://kit.fontawesome.com/3412ef2576.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        .navbar h1 i {
+            margin-left: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .navbar a i {
+            margin-right: 5px;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            margin: 20px;
+        }
+        .toolkit-buttons {
+            margin-bottom: 20px;
+        }
+        .toolkit-buttons button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .toolkit-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .iframe-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .live-clock {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Raspberry Web <i class="fa-brands fa-raspberry-pi"></i></h1>
+        <div>
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="rasbin.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a href="toolkit.html"><i class="fa-solid fa-screwdriver-wrench"></i> Toolkit</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Toolkit</h1>
+        <div class="toolkit-buttons">
+            <button onclick="toggleSection('calculator')"><i class="fa-solid fa-calculator"></i> Open Calculator</button>
+            <button onclick="toggleSection('audio-player')"><i class="fa-solid fa-music"></i> Open Music Player</button>
+            <button onclick="toggleSection('youtube-player')"><i class="fa-solid fa-radio"></i> Radio</button>
+            <button onclick="toggleSection('live-clock')"><i class="fa-solid fa-clock"></i> Open Live Clock</button>
+        </div>
+
+        <div id="calculator" class="iframe-container" style="display: none;">
+            <iframe src="https://www.calculator.net/" title="Calculator"></iframe>
+        </div>
+
+        <div id="audio-player" class="iframe-container" style="display: none;">
+            <iframe src="/audio_player.html" title="Audio Player"></iframe>
+        </div>
+
+        <div id="youtube-player" class="iframe-container" style="display: none;">
+            <div id="youtube-video"></div>
+        </div>
+
+        <div id="live-clock" class="iframe-container" style="display: none;">
+            <div id="clock" class="live-clock"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Made with ❤ by Snipe Co.🍀
+    </div>
+
+    <script>
+        const apiKey = 'AIzaSyB6PGXjSgveGnf1wiyzgd8NJu4SM1gFdnc'; // Replace with your YouTube Data API key
+        const livestreamId = 'oWW5TLrrbNo'; // Replace with your livestream video ID
+
+        // Function to toggle visibility of different sections
+        function toggleSection(id) {
+            const sections = ['calculator', 'audio-player', 'youtube-player', 'live-clock'];
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (section === id) {
+                    element.style.display = (element.style.display === 'block' ? 'none' : 'block');
+                    if (section === 'youtube-player') {
+                        loadYouTubePlayer();
+                    }
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+
+            if (id === 'live-clock') {
+                updateClock();
+                setInterval(updateClock, 1000); // Update the clock every second
+            }
+        }
+
+        // Load YouTube player using YouTube Data API
+        function loadYouTubePlayer() {
+            const youtubeVideo = document.getElementById('youtube-video');
+            fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${livestreamId}&key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.items.length > 0) {
+                        const video = data.items[0];
+                        const title = video.snippet.title;
+                        youtubeVideo.innerHTML = `
+                            <h2>${title}</h2>
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/${livestreamId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        `;
+                    } else {
+                        youtubeVideo.innerHTML = '<p>Livestream not found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching YouTube video:', error);
+                    youtubeVideo.innerHTML = '<p>Error loading livestream.</p>';
+                });
+        }
+
+        // Update live clock every second
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const clock = document.getElementById('clock');
+            clock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+    </script>
+</body>
+</html>
 
