@@ -19,9 +19,10 @@ body {
 .scrolling-text {
     position: absolute;
     font-size: 24px; /* Larger text size */
-    animation: scroll 20s linear infinite; /* Faster scrolling */
     white-space: nowrap;
-    top: 100%; /* Start from below the viewable area */
+    text-align: center; /* Center text horizontally */
+    animation: scroll 20s linear infinite; /* Faster scrolling */
+    bottom: 0; /* Start from the bottom of the viewport */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Center horizontally */
 }
