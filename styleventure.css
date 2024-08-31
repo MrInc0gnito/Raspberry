@@ -18,19 +18,20 @@ body {
 
 .scrolling-text {
     position: absolute;
+    font-size: 24px; /* Larger text size */
+    animation: scroll 20s linear infinite; /* Faster scrolling */
     white-space: nowrap;
-    font-size: 24px; /* Make the text larger */
-    animation: scroll 60s linear infinite; /* Slow down the scrolling */
-    /* Initial position starts just outside the top of the viewport */
-    transform: translateY(100%);
+    top: 100%; /* Start from below the viewable area */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
 }
 
 @keyframes scroll {
     from {
-        transform: translateY(100%);
+        transform: translateY(100%); /* Start below the viewport */
     }
     to {
-        transform: translateY(-100%);
+        transform: translateY(-100%); /* End above the viewport */
     }
 }
 
