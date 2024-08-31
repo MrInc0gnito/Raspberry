@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toolkit</title>
+    <script src="https://kit.fontawesome.com/3412ef2576.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,6 +22,11 @@
         }
         .navbar h1 {
             margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        .navbar h1 i {
+            margin-left: 10px;
         }
         .navbar a {
             color: white;
@@ -28,6 +34,11 @@
             padding: 10px 15px;
             border-radius: 4px;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .navbar a i {
+            margin-right: 5px;
         }
         .navbar a:hover {
             background-color: #0056b3;
@@ -79,21 +90,21 @@
 </head>
 <body>
     <div class="navbar">
-        <h1>Raspberry Web</h1>
+        <h1>Raspberry Web <i class="fa-brands fa-raspberry-pi"></i></h1>
         <div>
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
-            <a href="toolkit.html">Toolkit</a>
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a href="toolkit.html"><i class="fa-solid fa-screwdriver-wrench"></i> Toolkit</a>
         </div>
     </div>
 
     <div class="container">
         <h1>Toolkit</h1>
         <div class="toolkit-buttons">
-            <button onclick="toggleSection('calculator')">Open Calculator</button>
-            <button onclick="toggleSection('audio-player')">Open Audio Player</button>
-            <button onclick="toggleSection('youtube-player')">Open YouTube Player</button>
-            <button onclick="toggleSection('live-clock')">Open Live Clock</button>
+            <button onclick="toggleSection('calculator')"><i class="fa-solid fa-calculator"></i> Open Calculator</button>
+            <button onclick="toggleSection('audio-player')"><i class="fa-solid fa-music"></i> Open Music Player</button>
+            <button onclick="toggleSection('youtube-player')"><i class="fa-solid fa-radio"></i> Radio</button>
+            <button onclick="toggleSection('live-clock')"><i class="fa-solid fa-clock"></i> Open Live Clock</button>
         </div>
 
         <div id="calculator" class="iframe-container" style="display: none;">
@@ -145,7 +156,7 @@
         // Load YouTube player using YouTube Data API
         function loadYouTubePlayer() {
             const youtubeVideo = document.getElementById('youtube-video');
-            fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${"oWW5TLrrbNo"}&key=${"AIzaSyAXMRnslXqP0dHewDSoC6seOX7o7tC0eDE"}`)
+            fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${livestreamId}&key=${apiKey}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.items.length > 0) {
@@ -177,4 +188,3 @@
     </script>
 </body>
 </html>
-
