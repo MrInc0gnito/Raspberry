@@ -3,23 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credits</title>
-    <link rel="stylesheet" href="styleventure.css">
+    <title>Scrolling Credits</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .scrolling-container {
+            height: 80vh;
+            width: 80vw;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .scrolling-credits {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            animation: scroll-up 39s linear infinite; /* Match the animation duration to the song length */
+        }
+
+        @keyframes scroll-up {
+            0% { top: 100%; }
+            100% { top: -100%; }
+        }
+
+        p {
+            margin: 0;
+            padding: 10px 0;
+            font-size: 24px;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="credits-container">
-        <div class="scrolling-text">
-            <p>Thank you for visiting our website!</p>
-            <p>Developed by John Doe</p>
-            <p>Designed by Jane Smith</p>
-            <p>Special thanks to our team!</p>
-            <p>Music by Composer Name</p>
-            <!-- Add more credits as needed -->
+    <div class="scrolling-container">
+        <div class="scrolling-credits">
+            <p>Thanks for using Raspberry Web</p>
+            <p>Creators: MrInc0gnito</p>
+            <p>Special Group Mentions: FontAwesome, JSFiddle, Cloudflare, GitHub,</p>
+            <p>W3Schools, GeeksForGeeks, StackOverflow, Google, Raspberry Pi Foundation,</p>
+            <p>DJ JBK, DEV.TO, Youtube API, YTLooted</p>
+            <p>Music By: Synthou</p>
+            <p>Radio By: NCS</p>
+            <p>Music Player By: ZXMushroom63</p>
+            <p>Special People Mentions: Georgie, Dominic, Tommy, Al, Reece, Austin, Tristan, George A, Owen W, George H, Lucy L, Lola, Ashley, Daniel, Samuel, Isaac, Ned, Hazza</p>
+
+            <!-- Blank lines for spacing -->
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            <p>- end -</p>
         </div>
     </div>
-    <audio autoplay loop>
-        <source src="sijddij.wav" type="audio/wav">
-        Your browser does not support the audio element.
-    </audio>
+
+    <!-- Background Music -->
+    <audio src="https://ronaldomaths.pages.dev/sijddij.wav" autoplay loop></audio>
 </body>
 </html>
